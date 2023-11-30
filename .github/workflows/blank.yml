@@ -1,36 +1,92 @@
-# This is a basic workflow to help you get started with Actions
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+ font-family: Arial, sans-serif;
+}
 
-name: CI
+/* Style the tab */
+.tab {
+ overflow: hidden;
+ border: 1px solid #ccc;
+ background-color: #f1f1f1;
+}
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+/* Style the buttons inside the tab */
+.tab button {
+ background-color: inherit;
+ float: left;
+ border: none;
+ outline: none;
+ cursor: pointer;
+ padding: 14px 16px;
+ transition: 0.3s;
+}
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+/* Change background color of buttons on hover */
+.tab button:hover {
+ background-color: #ddd;
+}
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+/* Create an active/current tablink class */
+.tab button.active {
+ background-color: #ccc;
+}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+/* Style the tab content */
+.tabcontent {
+ display: none;
+ padding: 6px 12px;
+ border: 1px solid #ccc;
+ border-top: none;
+}
+</style>
+</head>
+<body>
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+<h2>Clicavel Tabs</h2>
+<p>Click on the tabs to change the content:</p>
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+<div class="tab">
+ <button class="tablinks" onclick="openTab(event, 'London')">London</button>
+ <button class="tablinks" onclick="openTab(event, 'Paris')">Paris</button>
+ <button class="tablinks" onclick="openTab(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent">
+ <h3>London</h3>
+ <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+ <h3>Paris</h3>
+ <p>Paris is the capital city of France.</p>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+ <h3>Tokyo</h3>
+ <p>Tokyo is the capital city of Japan.</p>
+</div>
+
+<script>
+function openTab(evt, cityName) {
+ var i, tabcontent, tablinks;
+ tabcontent = document.getElementsByClassName("tabcontent");
+ for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+ }
+ tablinks = document.getElementsByClassName("tablinks");
+ for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+ }
+ document.getElementById(cityName).style.display = "block";
+ evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
